@@ -23,7 +23,11 @@ function Index() {
 
   async function fetchTransactions() {
     try {
-      const response = await axios.get("http://localhost:3001/transactions");
+      const url =
+        process.env.NODE_ENV === "production"
+          ? `https://budgetbackend.onrender.com/transactions`
+          : `http://localhost:3001/transactions`;
+      const response = await axios.get(url);
       setTransactions(response.data);
     } catch (error) {
       console.log(error);
@@ -39,7 +43,11 @@ function Index() {
 
   async function handleDeleteTransaction(id) {
     try {
-      await axios.delete(`http://localhost:3001/transactions/${id}`);
+      const url =
+        process.env.NODE_ENV === "production"
+          ? `https://budgetbackend.onrender.com/transactions`
+          : `http://localhost:3001/transactions`;
+      await axios.delete(`${url}/${id}`);
       fetchTransactions();
     } catch (error) {
       console.log(error);

@@ -16,7 +16,11 @@ function Create() {
 
   async function handleCreateTransaction() {
     try {
-      const response = await axios.post("http://localhost:3001/transactions", {
+      const url =
+        process.env.NODE_ENV === "production"
+          ? `https://budgetbackend.onrender.com/transactions`
+          : `http://localhost:3001/transactions`;
+      const response = await axios.post(url, {
         item_name,
         amount: isDeposit ? amount : -amount,
         date,
@@ -27,7 +31,7 @@ function Create() {
       setShowAlert(true);
       setTimeout(() => {
         setShowAlert(false);
-      }, 3000); // Hide the alert after 3 seconds
+      }, 3000);
     } catch (error) {
       console.log(error);
     }

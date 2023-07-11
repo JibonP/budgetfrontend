@@ -13,9 +13,11 @@ function Show() {
 
   async function fetchTransaction() {
     try {
-      const response = await axios.get(
-        `http://localhost:3001/transactions/${id}`
-      );
+      const url =
+        process.env.NODE_ENV === "production"
+          ? `https://budgetbackend.onrender.com/transactions`
+          : `http://localhost:3001/transactions`;
+      const response = await axios.get(`${url}/${id}`);
       setTransaction(response.data);
     } catch (error) {
       console.log(error);

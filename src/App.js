@@ -15,7 +15,6 @@ function App() {
         <Route path="/transactions/:id" element={<Show />} />
         <Route path="/create" element={<Create />} />
         <Route path="/edit/:id" element={<Edit />} />
-        {/* Add the Route for the Edit component */}
       </Routes>
     </Router>
   );
